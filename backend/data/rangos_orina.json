@@ -1,0 +1,104 @@
+{
+    "nombre": "Examen General de Orina",
+    "codigo": "examen_orina",
+    "parametros": [
+        {
+            "nombre": "Color",
+            "tipo": "cualitativo",
+            "valor_normal": "Amarillo claro",
+            "valores_posibles": ["Amarillo claro", "Amarillo", "Amarillo oscuro", "Ámbar", "Rojizo", "Turbio"]
+        },
+        {
+            "nombre": "Aspecto",
+            "tipo": "cualitativo",
+            "valor_normal": "Transparente",
+            "valores_posibles": ["Transparente", "Ligeramente turbio", "Turbio", "Lechoso"]
+        },
+        {
+            "nombre": "Densidad",
+            "tipo": "cuantitativo",
+            "unidad": "g/L",
+            "rango_min": 1.005,
+            "rango_max": 1.030
+        },
+        {
+            "nombre": "pH",
+            "tipo": "cuantitativo",
+            "unidad": "pH",
+            "rango_min": 5.0,
+            "rango_max": 7.0
+        },
+        {
+            "nombre": "Glucosa",
+            "tipo": "cuantitativo",
+            "unidad": "mg/dL",
+            "rango_min": 0.0,
+            "rango_max": 15.0
+        },
+        {
+            "nombre": "Proteínas",
+            "tipo": "cuantitativo",
+            "unidad": "mg/dL",
+            "rango_min": 0.0,
+            "rango_max": 10.0
+        },
+        {
+            "nombre": "Cetonas",
+            "tipo": "cualitativo",
+            "valor_normal": "Negativo",
+            "valores_posibles": ["Negativo", "Trazas", "Positivo +", "Positivo ++", "Positivo +++"]
+        },
+        {
+            "nombre": "Bilirrubina",
+            "tipo": "cualitativo",
+            "valor_normal": "Negativo",
+            "valores_posibles": ["Negativo", "Positivo +", "Positivo ++"]
+        },
+        {
+            "nombre": "Urobilinógeno",
+            "tipo": "cuantitativo",
+            "unidad": "mg/dL",
+            "rango_min": 0.1,
+            "rango_max": 1.0
+        },
+        {
+            "nombre": "Nitritos",
+            "tipo": "cualitativo",
+            "valor_normal": "Negativo",
+            "valores_posibles": ["Negativo", "Positivo"]
+        },
+        {
+            "nombre": "Sangre",
+            "tipo": "cualitativo",
+            "valor_normal": "Negativo",
+            "valores_posibles": ["Negativo", "Trazas", "Positivo +", "Positivo ++", "Positivo +++"]
+        },
+        {
+            "nombre": "Leucocitos",
+            "tipo": "cuantitativo",
+            "unidad": "células/campo",
+            "rango_min": 0.0,
+            "rango_max": 5.0
+        },
+        {
+            "nombre": "Eritrocitos",
+            "tipo": "cuantitativo",
+            "unidad": "células/campo",
+            "rango_min": 0.0,
+            "rango_max": 3.0
+        },
+        {
+            "nombre": "Células Epiteliales",
+            "tipo": "cuantitativo",
+            "unidad": "células/campo",
+            "rango_min": 0.0,
+            "rango_max": 5.0
+        },
+        {
+            "nombre": "Cristales",
+            "tipo": "cualitativo",
+            "valor_normal": "No se observan",
+            "valores_posibles": ["No se observan", "Escasos", "Oxalato de calcio abundantes", "Ácido úrico abundantes", "Fosfatos amorfos"]
+        }
+    ]
+}

@@ -1,0 +1,106 @@
+{
+    "nombre": "Química Sanguínea (Perfil Metabólico)",
+    "codigo": "quimica_sanguinea",
+    "parametros": [
+        {
+            "nombre": "Glucosa",
+            "unidad": "mg/dL",
+            "rango_min": 70.0,
+            "rango_max": 100.0
+        },
+        {
+            "nombre": "Urea",
+            "unidad": "mg/dL",
+            "rango_min": 15.0,
+            "rango_max": 45.0
+        },
+        {
+            "nombre": "Creatinina",
+            "unidad": "mg/dL",
+            "rango_min": 0.6,
+            "rango_max": 1.3,
+            "genero_especifico": true,
+            "rango_min_hombre": 0.7,
+            "rango_max_hombre": 1.3,
+            "rango_min_mujer": 0.6,
+            "rango_max_mujer": 1.1
+        },
+        {
+            "nombre": "Ácido Úrico",
+            "unidad": "mg/dL",
+            "rango_min": 2.6,
+            "rango_max": 7.2,
+            "genero_especifico": true,
+            "rango_min_hombre": 3.5,
+            "rango_max_hombre": 7.2,
+            "rango_min_mujer": 2.6,
+            "rango_max_mujer": 6.0
+        },
+        {
+            "nombre": "BUN",
+            "unidad": "mg/dL",
+            "rango_min": 8.0,
+            "rango_max": 26.0
+        },
+        {
+            "nombre": "Colesterol Total",
+            "unidad": "mg/dL",
+            "rango_min": 120.0,
+            "rango_max": 200.0
+        },
+        {
+            "nombre": "Triglicéridos",
+            "unidad": "mg/dL",
+            "rango_min": 40.0,
+            "rango_max": 150.0
+        },
+        {
+            "nombre": "Colesterol HDL",
+            "unidad": "mg/dL",
+            "rango_min": 40.0,
+            "rango_max": 60.0
+        },
+        {
+            "nombre": "Colesterol LDL",
+            "unidad": "mg/dL",
+            "rango_min": 0.0,
+            "rango_max": 100.0
+        },
+        {
+            "nombre": "Bilirrubina Total",
+            "unidad": "mg/dL",
+            "rango_min": 0.3,
+            "rango_max": 1.2
+        },
+        {
+            "nombre": "Bilirrubina Directa",
+            "unidad": "mg/dL",
+            "rango_min": 0.0,
+            "rango_max": 0.3
+        },
+        {
+            "nombre": "TGO (AST)",
+            "unidad": "U/L",
+            "rango_min": 5.0,
+            "rango_max": 40.0
+        },
+        {
+            "nombre": "TGP (ALT)",
+            "unidad": "U/L",
+            "rango_min": 7.0,
+            "rango_max": 56.0
+        },
+        {
+            "nombre": "Proteínas Totales",
+            "unidad": "g/dL",
+            "rango_min": 6.0,
+            "rango_max": 8.0
+        },
+        {
+            "nombre": "Albúmina",
+            "unidad": "g/dL",
+            "rango_min": 3.5,
+            "rango_max": 5.0
+        }
+    ]
+}

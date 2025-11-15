@@ -1,0 +1,111 @@
+{
+    "nombre": "Biometría Hemática Completa",
+    "codigo": "biometria_hematica",
+    "parametros": [
+        {
+            "nombre": "Eritrocitos",
+            "unidad": "x10⁶/μL",
+            "rango_min": 4.0,
+            "rango_max": 5.9,
+            "genero_especifico": true,
+            "rango_min_hombre": 4.5,
+            "rango_max_hombre": 5.9,
+            "rango_min_mujer": 4.0,
+            "rango_max_mujer": 5.2
+        },
+        {
+            "nombre": "Hemoglobina",
+            "unidad": "g/dL",
+            "rango_min": 12.0,
+            "rango_max": 17.5,
+            "genero_especifico": true,
+            "rango_min_hombre": 13.5,
+            "rango_max_hombre": 17.5,
+            "rango_min_mujer": 12.0,
+            "rango_max_mujer": 16.0
+        },
+        {
+            "nombre": "Hematocrito",
+            "unidad": "%",
+            "rango_min": 37.0,
+            "rango_max": 54.0,
+            "genero_especifico": true,
+            "rango_min_hombre": 40.0,
+            "rango_max_hombre": 54.0,
+            "rango_min_mujer": 37.0,
+            "rango_max_mujer": 47.0
+        },
+        {
+            "nombre": "VCM",
+            "unidad": "fL",
+            "rango_min": 80.0,
+            "rango_max": 100.0
+        },
+        {
+            "nombre": "HCM",
+            "unidad": "pg",
+            "rango_min": 27.0,
+            "rango_max": 33.0
+        },
+        {
+            "nombre": "CHCM",
+            "unidad": "g/dL",
+            "rango_min": 32.0,
+            "rango_max": 36.0
+        },
+        {
+            "nombre": "Leucocitos Totales",
+            "unidad": "x10³/μL",
+            "rango_min": 4.5,
+            "rango_max": 11.0
+        },
+        {
+            "nombre": "Neutrófilos",
+            "unidad": "%",
+            "rango_min": 50.0,
+            "rango_max": 70.0
+        },
+        {
+            "nombre": "Linfocitos",
+            "unidad": "%",
+            "rango_min": 20.0,
+            "rango_max": 40.0
+        },
+        {
+            "nombre": "Monocitos",
+            "unidad": "%",
+            "rango_min": 2.0,
+            "rango_max": 10.0
+        },
+        {
+            "nombre": "Eosinófilos",
+            "unidad": "%",
+            "rango_min": 1.0,
+            "rango_max": 4.0
+        },
+        {
+            "nombre": "Basófilos",
+            "unidad": "%",
+            "rango_min": 0.0,
+            "rango_max": 1.0
+        },
+        {
+            "nombre": "Plaquetas",
+            "unidad": "x10³/μL",
+            "rango_min": 150.0,
+            "rango_max": 450.0
+        },
+        {
+            "nombre": "VPM",
+            "unidad": "fL",
+            "rango_min": 7.0,
+            "rango_max": 11.0
+        },
+        {
+            "nombre": "PDW",
+            "unidad": "%",
+            "rango_min": 10.0,
+            "rango_max": 18.0
+        }
+    ]
+}

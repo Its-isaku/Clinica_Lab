@@ -8,8 +8,15 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)  # Habilitar CORS para React
 
-# Obtener colección de MongoDB
-collection = get_collection()
+# Lazy load collection when needed
+collection = None
+
+def get_db_collection():
+    """Get database collection with lazy initialization"""
+    global collection
+    if collection is None:
+        collection = get_collection()
+    return collection
 
 
 # ============ UTILIDADES ============
@@ -47,7 +54,7 @@ def get_pacientes():
     """
     try:
         # Buscar solo pacientes activos
-        pacientes = list(collection.find({'activo': True}))
+        pacientes = list(get_db_collection().find({'activo': True}))
         
         # Serializar ObjectIds
         pacientes = [serialize_paciente(p) for p in pacientes]
@@ -78,7 +85,7 @@ def get_paciente(id):
             return jsonify({'error': 'ID de paciente inválido'}), 400
         
         # Buscar paciente
-        paciente = collection.find_one({'_id': ObjectId(id)})
+        paciente = get_db_collection().find_one({'_id': ObjectId(id)})
         
         if not paciente:
             return jsonify({'error': 'Paciente no encontrado'}), 404
@@ -144,10 +151,10 @@ def create_paciente():
         datos['activo'] = True
         
         # Insertar en MongoDB
-        result = collection.insert_one(datos)
+        result = get_db_collection().insert_one(datos)
         
         # Retornar paciente creado
-        paciente = collection.find_one({'_id': result.inserted_id})
+        paciente = get_db_collection().find_one({'_id': result.inserted_id})
         
         return jsonify({
             'message': 'Paciente creado exitosamente',
@@ -193,7 +200,7 @@ def update_paciente(id):
         datos['fecha_modificacion'] = datetime.now().isoformat()
         
         # Actualizar en MongoDB
-        result = collection.update_one(
+        result = get_db_collection().update_one(
             {'_id': ObjectId(id)},
             {'$set': datos}
         )
@@ -202,7 +209,7 @@ def update_paciente(id):
             return jsonify({'error': 'Paciente no encontrado'}), 404
         
         # Retornar paciente actualizado
-        paciente = collection.find_one({'_id': ObjectId(id)})
+        paciente = get_db_collection().find_one({'_id': ObjectId(id)})
         
         return jsonify({
             'message': 'Paciente actualizado exitosamente',
@@ -230,7 +237,7 @@ def delete_paciente(id):
             return jsonify({'error': 'ID de paciente inválido'}), 400
         
         # Soft delete: marcar como inactivo en lugar de eliminar
-        result = collection.update_one(
+        result = get_db_collection().update_one(
             {'_id': ObjectId(id)},
             {'$set': {'activo': False, 'fecha_eliminacion': datetime.now().isoformat()}}
         )
@@ -261,11 +268,11 @@ def get_estadisticas():
     """
     try:
         # Total de pacientes activos
-        total_pacientes = collection.count_documents({'activo': True})
+        total_pacientes = get_db_collection().count_documents({'activo': True})
         
         # Estudios completados hoy
         hoy = datetime.now().date().isoformat()
-        estudios_hoy = collection.count_documents({
+        estudios_hoy = get_db_collection().count_documents({
             'activo': True,
             'estudio.fecha_creacion': {'$regex': f'^{hoy}'}
         })
@@ -278,7 +285,7 @@ def get_estadisticas():
                 'cantidad': {'$sum': 1}
             }}
         ]
-        por_tipo = list(collection.aggregate(pipeline))
+        por_tipo = list(get_db_collection().aggregate(pipeline))
         
         # Formatear conteo por tipo
         conteo_tipos = {

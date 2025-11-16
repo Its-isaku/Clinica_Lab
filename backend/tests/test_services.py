@@ -3,7 +3,7 @@ Tests para los servicios del backend
 
 Tests incluidos:
 1. test_generar_resultados_biometria - Genera 15 parámetros de biometría
-2. test_generar_resultados_quimica - Genera 15 parámetros de química
+2. test_generar_resultados_quimica - Genera 15 parámetros de química (CORREGIDO)
 3. test_generar_resultados_orina - Genera 15 parámetros de orina
 4. test_api_codigo_postal_valido - Consulta CP válido en API externa
 """
@@ -42,12 +42,24 @@ def test_generar_resultados_quimica():
     """
     Test 2: Verificar generación de Química Sanguínea
     
-    CORRECCIÓN: Ahora espera 15 parámetros (valor correcto)
+    CORRECCIÓN: Ahora espera 15 parámetros y verifica campos correctos
+    
+    ERROR ORIGINAL: Verificaba 'rango_normal' (NO EXISTE)
+    CORRECCIÓN: Verifica 'rango_min' y 'rango_max' (EXISTEN)
     """
     resultados = generar_resultados('quimica_sanguinea', 'F')
     
     # CORREGIDO: Ahora espera 15 parámetros
     assert len(resultados) == 15, f"Se esperaban 15 parámetros, se obtuvieron {len(resultados)}"
+    
+    # Verificar estructura con campos CORRECTOS
+    for resultado in resultados:
+        assert 'parametro' in resultado
+        assert 'valor' in resultado
+        assert 'unidad' in resultado
+        # CORREGIDO: Los campos correctos son rango_min y rango_max
+        assert 'rango_min' in resultado or 'tipo' in resultado  # Algunos tienen rango, otros son cualitativos
+        assert 'normal' in resultado
 
 
 def test_generar_resultados_orina():

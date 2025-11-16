@@ -1,6 +1,8 @@
 Flask
 flask-cors
-pymongo
+pymongo[srv]
+dnspython
+certifi
 requests
 pandas
 pytest

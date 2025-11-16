@@ -10,14 +10,14 @@ Fixtures disponibles:
 
 import pytest
 import sys
+import os
 from pathlib import Path
 
 # Agregar el directorio backend al path para importar módulos
 sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent))
 
 from app import app as flask_app
-from pymongo import MongoClient
-from config import Config
 
 
 @pytest.fixture
@@ -47,46 +47,108 @@ def client(app):
 
 
 @pytest.fixture
-def mongo_test():
+def mongo_test(monkeypatch):
     """
-    Fixture que provee una conexión a MongoDB de prueba
+    Fixture que provee una colección MongoDB mock para testing
     
-    IMPORTANTE: Usa una base de datos separada para testing
-    para no afectar los datos reales
-    
-    CORRECCIÓN: Agregados parámetros SSL/TLS para evitar errores de handshake
+    Ya que Python 3.12 tiene problemas SSL con MongoDB Atlas,
+    usamos un mock para los tests
     
     Yields:
-        Collection: Colección de pacientes para testing
+        Mock collection con métodos básicos
     """
-    # CORREGIDO: Agregar parámetros SSL/TLS a la URI
-    uri = Config.MONGO_URI
+    class MockCollection:
+        def __init__(self):
+            self.data = {}
+            self.counter = 1
+        
+        def insert_one(self, document):
+            from bson import ObjectId
+            doc_id = ObjectId()
+            document['_id'] = doc_id
+            self.data[str(doc_id)] = document
+            
+            class InsertResult:
+                def __init__(self, inserted_id):
+                    self.inserted_id = inserted_id
+            
+            return InsertResult(doc_id)
+        
+        def find_one(self, query):
+            if '_id' in query:
+                doc_id = str(query['_id'])
+                return self.data.get(doc_id)
+            for doc in self.data.values():
+                match = True
+                for key, value in query.items():
+                    if doc.get(key) != value:
+                        match = False
+                        break
+                if match:
+                    return doc
+            return None
+        
+        def find(self, query):
+            results = []
+            for doc in self.data.values():
+                match = True
+                for key, value in query.items():
+                    if doc.get(key) != value:
+                        match = False
+                        break
+                if match:
+                    results.append(doc)
+            return results
+        
+        def count_documents(self, query):
+            return len(self.find(query))
+        
+        def update_one(self, query, update):
+            doc = self.find_one(query)
+            if doc:
+                if '$set' in update:
+                    doc.update(update['$set'])
+                
+                class UpdateResult:
+                    def __init__(self, matched):
+                        self.matched_count = matched
+                        self.modified_count = matched
+                
+                return UpdateResult(1)
+            
+            class UpdateResult:
+                def __init__(self, matched):
+                    self.matched_count = matched
+                    self.modified_count = 0
+            
+            return UpdateResult(0)
+        
+        def aggregate(self, pipeline):
+            # Simple mock - just return empty results
+            return []
+        
+        def delete_many(self, query):
+            pass
     
-    # Si la URI no tiene parámetros SSL, agregarlos
-    if 'tls=' not in uri.lower() and 'ssl=' not in uri.lower():
-        # Agregar parámetros SSL seguros para testing
-        separator = '&' if '?' in uri else '?'
-        uri = f"{uri}{separator}tls=true&tlsAllowInvalidCertificates=true"
+    mock_collection = MockCollection()
     
-    # Crear cliente de prueba con configuración SSL
-    client = MongoClient(
-        uri,
-        serverSelectionTimeoutMS=5000,  # 5 segundos de timeout
-        connectTimeoutMS=5000
-    )
+    # Patch at database.mongo_db module level
+    import database.mongo_db as mongo_module
+    original_get_collection = mongo_module.get_collection
     
-    db = client['test_laboratorio_clinico']  # Base de datos de TEST
-    collection = db['pacientes_test']
+    def mock_get_collection():
+        return mock_collection
     
-    yield collection
+    monkeypatch.setattr(mongo_module, 'get_collection', mock_get_collection)
     
-    # Limpiar después de cada test
-    try:
-        collection.delete_many({})
-    except Exception as e:
-        print(f"Warning: No se pudo limpiar la colección de test: {e}")
-    finally:
-        client.close()
+    # Also patch in app module
+    import app
+    def mock_get_db_collection():
+        return mock_collection
+    
+    monkeypatch.setattr(app, 'get_db_collection', mock_get_db_collection)
+    
+    yield mock_collection
 
 
 @pytest.fixture
@@ -113,10 +175,12 @@ def paciente_ejemplo():
             'municipio': 'Tijuana',
             'estado': 'Baja California',
             'calle': 'Av. Revolución',
-            'numero_exterior': '123'
+            'numero_exterior': '123',
+            'numero_interior': '',
+            'referencias': 'Cerca del centro'
         },
         'estudio': {
             'tipo': 'biometria_hematica',
-            'notas': 'Paciente de prueba'
+            'notas': 'Paciente de prueba para testing'
         }
     }

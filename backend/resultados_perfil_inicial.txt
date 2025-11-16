@@ -1,0 +1,104 @@
+╔==============================================================================╗
+║                    ANÁLISIS DE RENDIMIENTO - BACKEND                         ║
+║               Sistema de Gestión de Laboratorio Clínico                      ║
+╚==============================================================================╝
+
+================================================================================
+TEST 1: Generación de Resultados - Biometría Hemática
+================================================================================
+
+--- cProfile (análisis detallado) ---
+Resultados generados: 15 parámetros
+         269 function calls in 0.001 seconds
+
+   Ordered by: cumulative time
+   List reduced from 53 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.001    0.001 generador_resultados.py:6(generar_resultados)
+        1    0.000    0.000    0.001    0.001 __init__.py:274(load)
+        1    0.001    0.001    0.001    0.001 {method 'read' of '_io.TextIOWrapper' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method _io.open}
+        1    0.000    0.000    0.000    0.000 __init__.py:299(loads)
+        1    0.000    0.000    0.000    0.000 decoder.py:333(decode)
+        1    0.000    0.000    0.000    0.000 pathlib.py:852(exists)
+        2    0.000    0.000    0.000    0.000 pathlib.py:731(parent)
+        3    0.000    0.000    0.000    0.000 pathlib.py:551(drive)
+        1    0.000    0.000    0.000    0.000 pathlib.py:835(stat)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.stat}
+        2    0.000    0.000    0.000    0.000 pathlib.py:407(_load_parts)
+        1    0.000    0.000    0.000    0.000 decoder.py:344(raw_decode)
+        2    0.000    0.000    0.000    0.000 pathlib.py:447(__fspath__)
+        2    0.000    0.000    0.000    0.000 pathlib.py:437(__str__)
+        5    0.000    0.000    0.000    0.000 pathlib.py:1157(__init__)
+        2    0.000    0.000    0.000    0.000 pathlib.py:387(_parse_path)
+        4    0.000    0.000    0.000    0.000 pa
+
+--- timeit (tiempo promedio) ---
+Tiempo promedio (100 ejecuciones): 0.0406 ms
+
+================================================================================
+TEST 2: Generación de Resultados - Química Sanguínea
+================================================================================
+Tiempo promedio (100 ejecuciones): 0.0344 ms
+
+================================================================================
+TEST 3: Generación de Resultados - Examen de Orina
+================================================================================
+Tiempo promedio (100 ejecuciones): 0.0342 ms
+
+================================================================================
+TEST 4: Consulta MongoDB - count_documents
+================================================================================
+⚠️  SKIP: MongoDB no disponible (SSL handshake failed: ac-6as1rsn-shard-00-00.uvdy1ub.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_E)
+Esto no afecta las métricas de generación de resultados
+
+================================================================================
+TEST 5: Consulta MongoDB - find con limit
+================================================================================
+⚠️  SKIP: MongoDB no disponible
+
+================================================================================
+TEST 6: API Externa - Copomex
+================================================================================
+Tiempo promedio (10 ejecuciones): 237.1706 ms
+NOTA: API externa es naturalmente más lenta (red)
+
+================================================================================
+TEST 7: Endpoint GET /api/pacientes
+================================================================================
+⚠️  SKIP: Endpoint retornó 500
+
+================================================================================
+TEST 8: Endpoint GET /api/estadisticas
+================================================================================
+⚠️  SKIP: Endpoint retornó 500
+
+================================================================================
+RESUMEN DE ANÁLISIS DE RENDIMIENTO
+================================================================================
+
+Tests realizados:
+1. ✓ Generación de Biometría Hemática
+2. ✓ Generación de Química Sanguínea
+3. ✓ Generación de Examen de Orina
+4. ~ Consulta MongoDB count_documents (si disponible)
+5. ~ Consulta MongoDB find con limit (si disponible)
+6. ~ API Externa Copomex (si disponible)
+7. ~ Endpoint GET /api/pacientes (si disponible)
+8. ~ Endpoint GET /api/estadisticas (si disponible)
+
+Herramientas utilizadas:
+- cProfile: Análisis detallado de llamadas a funciones
+- timeit: Medición precisa de tiempos de ejecución
+
+METRICAS PRINCIPALES (siempre disponibles):
+- Generación de resultados médicos (3 tipos de estudios)
+- Estas son las funciones críticas del sistema
+
+NOTA: Los tests de MongoDB/API pueden fallar si no hay conexión
+      Pero las métricas de generación de resultados siempre funcionan
+
+✓ Análisis completado
+Guarda estos resultados para tu reporte técnico
+

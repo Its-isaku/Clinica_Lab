@@ -13,7 +13,7 @@ import pytest
 import json
 
 
-def test_get_estadisticas(client):
+def test_get_estadisticas(client, mongo_test):
     """
     Test 5: Verificar endpoint de estadísticas
     
@@ -32,15 +32,21 @@ def test_get_estadisticas(client):
     assert 'por_tipo_estudio' in data
 
 
-def test_get_pacientes(client):
+def test_get_pacientes(client, mongo_test):
     """
     Test 6: Verificar endpoint de listar pacientes
     
     CORRECCIÓN: GET debe retornar 200, no 201
+    
+    ERROR ORIGINAL: assert response.status_code == 201 (INCORRECTO)
+    CORRECCIÓN: assert response.status_code == 200 (CORRECTO)
+    
+    GET retorna 200 (OK)
+    POST retorna 201 (Created)
     """
     response = client.get('/api/pacientes')
     
-    # CORREGIDO: GET retorna 200
+    # CORREGIDO: GET retorna 200, no 201
     assert response.status_code == 200, f"Se esperaba 200, se obtuvo {response.status_code}"
     
     data = response.get_json()
@@ -48,7 +54,7 @@ def test_get_pacientes(client):
     assert 'total' in data
 
 
-def test_create_paciente(client, paciente_ejemplo):
+def test_create_paciente(client, paciente_ejemplo, mongo_test):
     """
     Test 7: Verificar creación de paciente
     
@@ -95,12 +101,18 @@ def test_api_codigo_postal_invalido(client):
     """
     Test 9: Verificar que CP inválido retorna error 400
     
-    El endpoint valida correctamente y retorna 400 para entradas inválidas
+    CORRECCIÓN: El endpoint valida correctamente y retorna 400
+    
+    ERROR ORIGINAL: assert response.status_code == 500 (INCORRECTO)
+    CORRECCIÓN: assert response.status_code == 400 (CORRECTO)
+    
+    El endpoint valida la entrada ANTES de procesar, por lo que
+    retorna 400 (Bad Request) para CP inválido, NO 500 (Server Error)
     """
     # CP inválido (no es de 5 dígitos)
     response = client.get('/api-externa/cp/abc')
     
-    # Debe retornar 400 (Bad Request) para CP inválido
+    # CORREGIDO: Debe retornar 400 (Bad Request), no 500
     assert response.status_code == 400, f"Se esperaba 400, se obtuvo {response.status_code}"
     
     data = response.get_json()

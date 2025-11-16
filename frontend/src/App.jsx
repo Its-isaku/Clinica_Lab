@@ -1,20 +1,15 @@
 //?  imports
 import './styles/App.css'
+import Dashboard from './components/Dashboard';
 
 
 //? App component
 function App() {
 
-//? variables & states
-
-
-//? functions & handlers
-
-
 //? render
   return (
     <>
-
+      <Dashboard />
     </>
   )
 }

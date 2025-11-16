@@ -1,0 +1,165 @@
+/*? -------------------- Card Container --------------------*/
+.Cards_Container {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 2.5rem;
+    background-color: inherit;
+    margin-top: var(--spacing-lg);
+}
+
+/*? -------------------- Welcome text--------------------*/
+.Welcome_text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-lg);
+}
+
+.Welcome_text h2 {
+    font-size: var(--font-size-3xl);
+    font-weight: 600;
+    color: var(--color-dark);
+    margin: 0 0 var(--spacing-xs) 0;
+}
+
+.Welcome_text p {
+    font-size: var(--font-size-base);
+    color: var(--color-gray);
+    margin: 0;
+}
+
+/*? -------------------- Cards --------------------*/
+.Cards_Content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--spacing-lg);
+}
+
+.Card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-light);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-md);
+    width: 400px;
+    height: 250px;
+    transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+}
+
+.Card:hover {
+    box-shadow: var(--shadow-md);
+    border: 1.5px solid var(--color-primary);
+    background-color: var(--color-primary-lighter);
+}
+
+.Card_top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+.Card_icon {
+    background-color: var(--color-primary-lighter);
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    width: 60px;
+    height: 60px;
+}
+
+.Card_icon_primary {
+    background-color: var(--color-primary-lighter);
+    color: var(--color-primary);
+    transition: background 0.2s, color 0.2s;
+}
+.Card_icon_warning {
+    background-color: var(--color-warning-light);
+    color: var(--color-warning);
+    transition: background 0.2s, color 0.2s;
+}
+.Card_icon_success {
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+    transition: background 0.2s, color 0.2s;
+}
+.Card_icon_info {
+    background-color: var(--color-info-light);
+    color: var(--color-info);
+    transition: background 0.2s, color 0.2s;
+}
+
+/* Hover: iconos a color sólido y el icono blanco */
+.Card:hover .Card_icon_primary {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+.Card:hover .Card_icon_warning {
+    background-color: var(--color-warning);
+    color: #fff;
+}
+.Card:hover .Card_icon_success {
+    background-color: var(--color-success);
+    color: #fff;
+}
+.Card:hover .Card_icon_info {
+    background-color: var(--color-info);
+    color: #fff;
+}
+
+.Card_Percentage {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    transition: background 0.2s, color 0.2s;
+}
+
+.Good_Percentage {
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+    transition: background 0.2s, color 0.2s;
+}
+
+.Bad_Percentage {
+    background-color: var(--color-error-light);
+    color: var(--color-error);
+    transition: background 0.2s, color 0.2s;
+}
+
+/* Hover: porcentajes a color sólido y texto blanco */
+.Card:hover .Good_Percentage {
+    background-color: var(--color-success);
+    color: #fff;
+}
+.Card:hover .Bad_Percentage {
+    background-color: var(--color-error);
+    color: #fff;
+}
+
+.Card_bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-lg);
+}
+
+.Card_bottom h2 {
+    font-size: var(--font-size-5xl);
+    font-weight: 900;
+    color: var(--color-dark);
+    margin: 0;
+}
+.Card_bottom p {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray);
+    font-weight: 300;
+    margin: 0;
+}

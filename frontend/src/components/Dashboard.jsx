@@ -1,5 +1,7 @@
 //?  imports
-import './styles/Dashboard.css'
+import '../styles/Dashboard.css'
+import Navbar from './Navbar';
+import TarjetasEstadisticas from './TarjetasEstadisticas';
 
 
 //? Dashboard component
@@ -13,7 +15,8 @@ function Dashboard() {
 //? render
     return (
         <>
-
+            <Navbar />
+            <TarjetasEstadisticas />
         </>
     )
 }

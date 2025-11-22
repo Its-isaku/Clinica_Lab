@@ -1,0 +1,67 @@
+# ========== SISTEMA OPERATIVO ==========
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+
+# ========== IDEs / EDITORES ==========
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+
+
+# ========== ARCHIVOS SENSIBLES ==========
+.env
+.env.local
+.env.*.local
+*.secret
+secrets.json
+mongoPass.txt
+credentials.txt
+
+
+# ========== TEMPORALES GENERALES ==========
+*.tmp
+*.temp
+*.bak
+*.backup
+*.log
+
+
+# ========== CARPETAS DE DESARROLLO ==========
+tmp/
+temp/
+logs/
+
+
+# ========== PERFORMANCE ==========
+performance/*.txt
+performance/*.prof
+
+# Los .gitignore específicos están en:
+# - backend/.gitignore (Python/Flask)
+# - frontend/.gitignore (React/Node)

@@ -244,22 +244,32 @@ def update_paciente(id):
             fecha_nac = datetime.strptime(fecha_nac_str, '%Y-%m-%d')
             edad = (datetime.now() - fecha_nac).days // 365
             datos['datos_personales']['edad'] = edad
-        
+
+        #* Si se actualiza el tipo de estudio, generar nuevos resultados y actualizar nombre/fecha
+        paciente_actual = get_db_collection().find_one({'_id': ObjectId(id)})
+        tipo_estudio_nuevo = datos.get('estudio', {}).get('tipo')
+        tipo_estudio_actual = paciente_actual.get('estudio', {}).get('tipo') if paciente_actual else None
+        if tipo_estudio_nuevo and tipo_estudio_nuevo != tipo_estudio_actual:
+            sexo = datos.get('datos_personales', {}).get('sexo', 'M')
+            datos['resultados'] = generar_resultados(tipo_estudio_nuevo, sexo)
+            datos['estudio']['nombre'] = obtener_nombre_estudio(tipo_estudio_nuevo)
+            datos['estudio']['fecha_creacion'] = datetime.now().isoformat()
+
         #* Registrar fecha de última modificación
         datos['fecha_modificacion'] = datetime.now().isoformat()
-        
+
         #* Actualizar documento en MongoDB usando $set
         result = get_db_collection().update_one(
             {'_id': ObjectId(id)},
             {'$set': datos}
         )
-        
+
         if result.matched_count == 0:
             return jsonify({'error': 'Paciente no encontrado'}), 404
-        
+
         #* Retornar paciente actualizado
         paciente = get_db_collection().find_one({'_id': ObjectId(id)})
-        
+
         return jsonify({
             'message': 'Paciente actualizado exitosamente',
             'paciente': serialize_paciente(paciente)

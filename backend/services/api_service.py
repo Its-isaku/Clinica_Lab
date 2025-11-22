@@ -13,6 +13,7 @@
 
 import requests
 from typing import Dict, List, Optional
+from config import Config
 
 
 #? <|------------------- Excepción personalizada -------------------|>
@@ -71,7 +72,7 @@ def obtener_info_codigo_postal(cp: str) -> Dict:
         raise APIException(f"Código postal inválido: {cp}. Debe ser de 5 dígitos.")
     
     #* Construir URL de la API con el código postal y token
-    url = f"https://api.copomex.com/query/info_cp/{cp}?token=pruebas"
+    url = f"https://api.copomex.com/query/info_cp/{cp}?token={Config.API_CP_TOKEN}"
     
     try:
         #* Hacer request HTTP con timeout de 5 segundos

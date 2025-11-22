@@ -42,4 +42,4 @@ class Config:
     API_CP_BASE_URL = "https://api.copomex.com/query/info_cp"
     
     #! ||------------------- Token de pruebas - Usar token real en producción -------------------||
-    API_CP_TOKEN = "pruebas"
+    API_CP_TOKEN = "18b183a6-2dbd-479f-8b5f-3fd64471b58d"

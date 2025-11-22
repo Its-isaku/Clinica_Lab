@@ -82,12 +82,13 @@
 .Table_Content tr {
     padding: var(--spacing-md);
     text-align: center;
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-xl);
     color: var(--color-dark);
     font-weight: 400;
 }
 .Table_Content td {
     padding: var(--spacing-lg);
+    font-size: var(--font-size-xl);
 }
 
 /*? -------------------- Acction Btns --------------------*/

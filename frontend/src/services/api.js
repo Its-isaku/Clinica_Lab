@@ -49,7 +49,8 @@ export const eliminarPaciente = async (id) => {
 
 //? API EXTERNA - CÓDIGO POSTAL
 export const obtenerInfoCodigoPostal = async (codigoPostal) => {
-    const response = await api.get(`-externa/cp/${codigoPostal}`);
+    // Usar endpoint relativo para acceder correctamente a /api-externa
+    const response = await api.get(`/../api-externa/cp/${codigoPostal}`);
     return response.data;
 };
 

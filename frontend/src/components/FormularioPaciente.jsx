@@ -98,7 +98,9 @@ function FormularioPaciente({ paciente, modoEdicion, onGuardar, onCancelar }) {
                 municipio: municipio,
                 estado: estado
             },
-            tipo_estudio: formData.tipo_estudio
+            estudio: {
+                tipo: formData.tipo_estudio
+            }
         };
         onGuardar(datosPaciente);
     };

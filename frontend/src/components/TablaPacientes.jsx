@@ -65,8 +65,8 @@ function TablaPacientes({ pacientes, onVerResultados, onEditar, onEliminar }) {
                       {paciente.datos_personales.sexo === 'M' ? 'Masculino' : 'Femenino'}
                     </span>
                   </td>
-                  <td>{paciente.estudio.nombre_estudio}</td>
-                  <td>{formatearFecha(paciente.estudio.fecha_creacion)}</td>
+                  <td>{paciente.estudio?.nombre || 'Sin estudio'}</td>
+                  <td>{paciente.estudio?.fecha_creacion ? formatearFecha(paciente.estudio.fecha_creacion) : 'Sin fecha'}</td>
                   <td>
                     <div className="ActionBtns">
                       <button 

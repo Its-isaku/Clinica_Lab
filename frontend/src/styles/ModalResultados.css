@@ -1,14 +1,22 @@
 /* ModalResultados usa el mismo overlay de Modal.css */
 
 .modal-resultados {
-    background: var(--color-white);
-    border-radius: var(--border-radius-xl);
+    background: #fff;
+    border-radius: 24px;
     max-width: 1000px;
     width: 100%;
     max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
     animation: slideUp 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-scroll-content {
+    overflow-y: auto;
+    max-height: calc(90vh - 120px); /* Ajusta según la altura del header y footer */
+    padding-bottom: 8px;
 }
 
 @keyframes slideUp {
@@ -61,20 +69,40 @@
     font-size: 24px;
 }
 
+.card-paciente-datos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-size: var(--font-size-sm);
+    color: #222;
+    align-items: center;
+}
+
 /* GRID DE INFORMACIÓN */
 .info-grid {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-xl);
-    padding-top: var(--spacing-lg);
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    padding: 32px 32px 0 32px;
 }
 
 .info-paciente {
     background: var(--color-primary-lighter);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius-lg);
-    border: 2px solid var(--color-primary-light);
+    border-radius: 12px;
+    border: 2px solid var(--color-primary);
+    box-shadow: none;
+    padding: 24px 28px;
+    min-width: 420px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-weight: 400;
+    margin-bottom: 0;
+    gap: 0;
+    font-size: 1rem;
+    color: #222;
 }
 
 .nombre-paciente {
@@ -82,6 +110,13 @@
     font-weight: bold;
     color: var(--color-dark);
     margin: 0 0 var(--spacing-md) 0;
+}
+
+.card-paciente-nombre {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 8px;
 }
 
 .detalles-paciente,
@@ -110,26 +145,27 @@
 
 /* RESUMEN */
 .resumen-card {
-    background: var(--color-accent-light);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius-lg);
-    border: 2px solid var(--color-accent);
-    min-width: 280px;
+    background: var(--color-info-light);
+    border-radius: 12px;
+    border: 2px solid var(--color-info);
+    padding: 24px 28px;
+    min-width: 320px;
+    min-height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .resumen-card h4 {
-    font-size: var(--font-size-lg);
-    font-weight: bold;
-    color: var(--color-dark);
-    margin: 0 0 var(--spacing-sm) 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-info);
+    margin: 0 0 8px 0;
 }
 
 .resumen-texto {
-    font-size: var(--font-size-base);
-    color: var(--color-dark);
+    font-size: var(--font-size-sm);
+    color: #222;
     margin: 0;
     line-height: 1.5;
 }
@@ -153,13 +189,14 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    border-radius: var(--border-radius-lg);
+    border-radius: 16px;
     overflow: hidden;
-    border: 2px solid var(--color-gray-light);
+    border: 1px solid var(--color-gray);
 }
 
 .tabla-resultados thead {
-    background: var(--color-gray-lighter);
+    background: var(--color-primary-lighter);
+    border-top: 2px solid var(--color-primary);
 }
 
 .tabla-resultados th {
@@ -167,13 +204,15 @@
     text-align: left;
     font-size: var(--font-size-sm);
     font-weight: 700;
-    color: var(--color-dark);
+    color: var(--color-primary);
     text-transform: capitalize;
-    border-bottom: 2px solid var(--color-gray-light);
+    border-bottom: 1px solid var(--color-primary-light);
+    background: transparent;
 }
 
 .tabla-resultados tbody tr {
     transition: transform 0.2s, box-shadow 0.2s;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .tabla-resultados tbody tr:hover {
@@ -200,7 +239,7 @@
 
 .parametro-nombre {
     font-weight: 600;
-    color: var(--color-dark);
+    color: #222;
 }
 
 .parametro-valor {
@@ -215,19 +254,26 @@
 }
 
 .parametro-rango {
-    color: var(--color-gray);
+    color: var(--color-primary);
     font-size: var(--font-size-sm);
+    border-radius: var(--border-radius-md);
+    padding: 2px 10px;
+    display: inline-block;
 }
 
 /* BADGES DE ESTADO */
 .estado-badge {
     display: inline-flex;
     align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-xs) var(--spacing-md);
+    justify-content: center;
+    gap: 0;
+    padding: 2px 12px;
     border-radius: var(--border-radius-full);
     font-size: var(--font-size-xs);
     font-weight: 600;
+    min-width: 48px;
+    height: 22px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 
 .estado-badge span.material-symbols-outlined {

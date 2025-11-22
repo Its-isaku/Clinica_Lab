@@ -2,22 +2,20 @@
 import '../styles/Navbar.css'
 import Icon from './Icon';
 
-
 //? Navbar component
-function Navbar() {  
-//? variables & states
+function Navbar({ onAgregarPaciente }) {  
+    //? variables & states
 
+    //? functions & handlers
+    const handleClick = (e) => {
+        const button = e.currentTarget;
+        button.classList.remove('pulse');
+        // Force reflow para reiniciar la animación
+        void button.offsetWidth;
+        button.classList.add('pulse');
+    };
 
-//? functions & handlers
-const handleClick = (e) => {
-    const button = e.currentTarget;
-    button.classList.remove('pulse');
-    //* Force reflow para reiniciar la animación
-    void button.offsetWidth;
-    button.classList.add('pulse');
-};
-
-//? render
+    //? render
     return (
         <>
             <div className="Navbar_Container">
@@ -29,7 +27,15 @@ const handleClick = (e) => {
                     </div>
                 </div>
 
-                <button className='Navbar_Center' onClick={handleClick}><Icon name="add_circle" size={32} /> Agregar Paciente</button>
+                <button
+                    className='Navbar_Center'
+                    onClick={e => {
+                        handleClick(e);
+                        if (onAgregarPaciente) onAgregarPaciente(e);
+                    }}
+                >
+                    <Icon name="add_circle" size={32} /> Agregar Paciente
+                </button>
                 
                 <div className='Navbar_Right'>
                     <Icon name="ecg_heart" size={48} />

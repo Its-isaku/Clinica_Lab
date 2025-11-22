@@ -1,9 +1,9 @@
 //?  imports
-import '../styles/Modal.css'
+import '../styles/Modal.css';
 
 
 //? Modal component
-function Modal() {  
+function Modal({ children, onClose }) {  
 //? variables & states
 
 
@@ -12,9 +12,11 @@ function Modal() {
 
 //? render
     return (
-        <>
-
-        </>
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="modal-contenido" onClick={(e) => e.stopPropagation()}>
+                {children}
+            </div>
+        </div>
     )
 }
 

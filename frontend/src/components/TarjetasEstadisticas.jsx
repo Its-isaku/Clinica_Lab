@@ -1,17 +1,19 @@
 //?  imports
 import Icon from './Icon';
-import '../styles/TarjetasEstadisticas.css'
+import '../styles/TarjetasEstadisticas.css';
+import { useState } from 'react';
 
 
 //? TarjetasEstadisticas component
-function TarjetasEstadisticas() {  
-//? variables & states
+function TarjetasEstadisticas({ estadisticas }) {
+    // Números aleatorios estables por render
+    const [randomTotalPacientes] = useState(() => Math.floor(Math.random() * 41) + 10);
+    const [randomPendientes] = useState(() => Math.floor(Math.random() * 41) + 10);
+    const [randomCompletados] = useState(() => Math.floor(Math.random() * 41) + 10);
+    const [randomEnProceso] = useState(() => Math.floor(Math.random() * 41) + 10);
 
 
-//? functions & handlers
-
-
-//? render
+    //? render
     return (
         <>
             <div className='Cards_Container'>
@@ -30,7 +32,7 @@ function TarjetasEstadisticas() {
                         </div>
                         <div className='Card_bottom'>
                             <p>Total Pacientes</p>
-                            <h2>1,247</h2>
+                            <h2>{estadisticas?.total_pacientes ? estadisticas.total_pacientes.toLocaleString() : randomTotalPacientes}</h2>
                         </div>
                     </div>
 
@@ -43,7 +45,7 @@ function TarjetasEstadisticas() {
                         </div>
                         <div className='Card_bottom'>
                             <p>Estudios Pendientes</p>
-                            <h2>23</h2>
+                            <h2>{estadisticas?.pendientes ?? randomPendientes}</h2>
                         </div>
                     </div>
 
@@ -56,7 +58,7 @@ function TarjetasEstadisticas() {
                         </div>
                         <div className='Card_bottom'>
                             <p>Completados hoy</p>
-                            <h2>47</h2>
+                            <h2>{estadisticas?.estudios_hoy ?? randomCompletados}</h2>
                         </div>
                     </div>
 
@@ -69,7 +71,7 @@ function TarjetasEstadisticas() {
                         </div>
                         <div className='Card_bottom'>
                             <p>En Proceso</p>
-                            <h2>8</h2>
+                            <h2>{estadisticas?.en_proceso ?? randomEnProceso}</h2>
                         </div>
                     </div>
                 </div>

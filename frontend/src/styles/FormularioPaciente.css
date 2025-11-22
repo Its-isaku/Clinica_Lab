@@ -1,0 +1,172 @@
+.formulario-modal {
+    background: var(--color-white);
+}
+
+.formulario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-gray-lighter);
+}
+
+.formulario-header h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: bold;
+    color: var(--color-dark);
+    margin: 0;
+}
+
+.btn-cerrar {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    color: var(--color-gray);
+}
+
+.btn-cerrar:hover {
+    background: var(--color-gray-lighter);
+    color: var(--color-dark);
+}
+
+.btn-cerrar span {
+    font-size: 24px;
+}
+
+.formulario {
+    padding: var(--spacing-xl);
+}
+
+.seccion-formulario {
+    margin-bottom: var(--spacing-xl);
+}
+
+.seccion-formulario h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-primary-lighter);
+}
+
+.formulario-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-xs);
+}
+
+.form-group input,
+.form-group select {
+    padding: var(--spacing-md);
+    border: 2px solid var(--color-gray-light);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-base);
+    color: var(--color-dark);
+    transition: border-color 0.2s;
+    background: var(--color-white);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+    background: var(--color-gray-lighter);
+    cursor: not-allowed;
+    color: var(--color-gray);
+}
+
+.form-group input::placeholder {
+    color: var(--color-gray-light);
+}
+
+.loading-text {
+    color: var(--color-primary);
+    font-size: var(--font-size-xs);
+    margin-top: var(--spacing-xs);
+    font-style: italic;
+}
+
+.formulario-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl);
+    border-top: 1px solid var(--color-gray-lighter);
+    background: var(--color-gray-lighter);
+    margin: 0 calc(-1 * var(--spacing-xl));
+    margin-top: var(--spacing-xl);
+    border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background: var(--color-primary-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--color-primary-lighter);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .formulario-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .formulario-header,
+    .formulario {
+        padding: var(--spacing-lg);
+    }
+
+    .formulario-footer {
+        margin: 0 calc(-1 * var(--spacing-lg));
+        margin-top: var(--spacing-lg);
+    }
+}

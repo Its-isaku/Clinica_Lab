@@ -1,5 +1,5 @@
 //?  imports
-import './styles/Modal.css'
+import '../styles/Modal.css'
 
 
 //? Modal component

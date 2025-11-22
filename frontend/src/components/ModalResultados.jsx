@@ -1,5 +1,5 @@
 //?  imports
-import './styles/ModalResultados.css'
+import '../styles/ModalResultados.css'
 
 
 //? ModalResultados component
